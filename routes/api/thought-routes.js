@@ -4,10 +4,12 @@ const {
     removeThought
 } = require('../../controllers/thought-controller');
 
-router.route('/:userId')
+router
+.route('/:userId')
 .post(addThought);
 
-router.route('/:UserId/:thoughtId')
+router
+.route('/:UserId/:thoughtId')
 .delete(removeThought);
 
 module.exports = router;
