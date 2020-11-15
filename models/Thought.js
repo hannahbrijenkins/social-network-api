@@ -28,7 +28,7 @@ const ReactionSchema = new Schema(
         },
         id: false
     }
-)
+);
 
 const thoughtSchema = new Schema(
     {
