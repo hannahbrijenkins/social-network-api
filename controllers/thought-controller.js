@@ -1,6 +1,34 @@
 const { Thought, User } = require('../models');
 
 const thoughtController =  {
+    getAllThought(req, res) {
+        Thought.find({})
+            .populate({
+                path:'reactions',
+                select: '-__v'
+            })
+            .select('-__v')
+            .sort({ _id: -1 })
+            .then(dbThoughtData => res.json(dbThoughtData))
+            .catch(err => res.status(500).json(err));
+    },
+
+    getThoughtById({ params }, res) {
+        Thought.findOne({ _id: params.id })
+            .populate({
+                path: 'reactions',
+                select: '-__v'
+            })
+            .select('-__v')
+            .then(dbThoughtData => {
+                if(!dbThoughtData) {
+                    return res.status(404).json({ message: 'No thought was found by this Id, sorry! '})
+                }
+                res.json(dbThoughtData)
+            })
+            .catch(err => res.status(500).json)
+    },
+
     addThought({ params, body }, res) {
         console.log(body);
         Thought.create(body)
@@ -13,7 +41,7 @@ const thoughtController =  {
         })
         .then(dbUsers => {
             if (!dbUsers) {
-                res.statis(404).json({ message: 'No pizza found with this id!' });
+                res.statis(404).json({ message: 'No users found with this id!' });
                 return;
             }
             res.json(dbUsers);
