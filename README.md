@@ -10,7 +10,7 @@ You must use an application like Insomnia Core to do post, put, get, and delete 
 
 ## Video Walkthrough
 
-
+https://youtu.be/CP9RH30L0bI
 
 ## Authors
 
